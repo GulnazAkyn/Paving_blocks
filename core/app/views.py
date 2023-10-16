@@ -6,11 +6,12 @@ from .serializers import ProductSerializer, ImageSerializer
 
 class ProductListAPIView(ListAPIView):
     serializer_class = ProductSerializer
-    permission_classes = (IsAuthenticated, )
+    queryset = Product.objects.all()
+    # permission_classes = (IsAuthenticated, )
 
-    def get_queryset(self):
-        queryset = Product.objects.filter(user=self.request.user)
-        return queryset
+    # def get_queryset(self):
+    #
+    #     return queryset
 
 class ProductDetailAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()

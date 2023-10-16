@@ -29,7 +29,6 @@ class ImageSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ProductSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
     category = CategorySerializer()
     # images = ImageSerializer()
 

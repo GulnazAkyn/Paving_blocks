@@ -27,12 +27,12 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser):
     username = models.CharField(max_length=125, unique=True)
     email = models.EmailField(unique=True)
-    phone = models.CharField(max_length=50)
+    phone = models.CharField(max_length=50, unique=True)
     is_admin = models.BooleanField(default=False)
 
     objects = UserManager()
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['phone']
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username', 'phone']
 
     def has_perm(self, perm, obj=None):
         """Does the user have a specific permission?"""
