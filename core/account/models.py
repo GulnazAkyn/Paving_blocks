@@ -1,6 +1,6 @@
 from django.db import models
 
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 
 
 class UserManager(BaseUserManager):
@@ -24,15 +24,15 @@ class UserManager(BaseUserManager):
 
         return user
 
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=125, unique=True)
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=50, unique=True)
     is_admin = models.BooleanField(default=False)
 
     objects = UserManager()
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'phone']
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email', 'phone']
 
     def has_perm(self, perm, obj=None):
         """Does the user have a specific permission?"""
