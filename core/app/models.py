@@ -58,7 +58,7 @@ class Product(models.Model):
 
 
 class Order(models.Model):
-    product = models.ManyToManyField(Product)
+    products = models.ManyToManyField(Product)
     quantity = models.SmallIntegerField(default=1)
     total = models.DecimalField(decimal_places=2, max_digits=10)
     status = models.CharField(
